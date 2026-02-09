@@ -1,0 +1,26 @@
+will-mars-web/
+├── public/                 # Static assets
+│   ├── images/             # Local images (logo, background, food)
+│   └── favicon.ico         
+├── src/
+│   ├── assets/             # Brand assets (SVGs, Icons)
+│   ├── components/         # Reusable UI components
+│   │   ├── Navbar.jsx      # Fixed blur navigation
+│   │   ├── Footer.jsx      # Contact info & copyright
+│   │   ├── MenuCard.jsx    # Individual food/drink item layout
+│   │   ├── ReviewCard.jsx  # Customer testimonial layout
+│   │   └── FloatingActions.jsx # WhatsApp & Glovo fixed buttons
+│   ├── sections/           # High-level page sections
+│   │   ├── Hero.jsx        # Landing section
+│   │   ├── About.jsx       # The Will-mar story
+│   │   ├── Menu.jsx        # Food & Cocktails grid
+│   │   ├── Gallery.jsx     # Photo grid (Instagram style)
+│   │   └── Location.jsx    # Google Map & Contact form
+│   ├── constants/          
+│   │   └── data.js         # Menu items, prices, and reviews
+│   ├── App.jsx             # Main assembly file
+│   ├── index.css           # Tailwind directives & global fonts
+│   └── main.jsx            # React entry point
+├── tailwind.config.js      # Custom colors (Amber/Gold/Zinc)
+├── package.json
+└── vite.config.js
