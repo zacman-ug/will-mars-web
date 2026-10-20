@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AuthProvider {
+  local
+  google
+  facebook
+}
+
+model Customer {
+  id           String       @id @default(cuid())
+  firstName    String
+  lastName     String
+  birthday     DateTime?
+  phone        String       @unique
+  email        String       @unique
+  passwordHash String?
+  provider     AuthProvider @default(local)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  orders       Order[]
+
+  @@index([email])
+  @@index([phone])
+}
+
+model DeliveryZone {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  fee       Int
+  sortOrder Int      @default(0)
+  active    Boolean  @default(true)
+  orders    Order[]
+}
+
+model Order {
+  id             String        @id @default(cuid())
+  customerId     String?
+  customer       Customer?     @relation(fields: [customerId], references: [id])
+  guestName      String
+  guestPhone     String
+  fulfillment    String
+  note           String?
+  destination    String?
+  deliveryZoneId String?
+  deliveryZone   DeliveryZone? @relation(fields: [deliveryZoneId], references: [id])
+  deliveryFee    Int           @default(0)
+  subtotal       Int
+  total          Int
+  itemsJson      Json
+  createdAt      DateTime      @default(now())
+}
