@@ -15,7 +15,7 @@ export default function About() {
             Will-mar’s is more than a restaurant; it’s a destination. Whether you’re here for legendary Happy Hour cocktails, vibrant Saturday nights, or the famous all-you-can-eat Sunday spread, we keep a premium atmosphere that still feels like home.
           </p>
           <p>
-            The kitchen runs local stews and luwombo alongside burgers, chips, and a full bar. Come for katogo in the morning, stay for a Will-mar Special after five.
+            The kitchen runs local stews and luwombo alongside burgers, chips, and a full bar. There are rooms above the house if you are staying, and a bakery counter for cakes and morning trays. Come for katogo in the morning, stay for a Will-mar Special after five.
           </p>
           <div className="grid sm:grid-cols-3 gap-4 pt-4">
             {SPECIALS.map((item) => (

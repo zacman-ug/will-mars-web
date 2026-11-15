@@ -11,6 +11,10 @@ import About from './pages/About';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import AuthPage from './pages/Auth';
+import StaysPage from './pages/Stays';
+import StayListingPage from './pages/StayListing';
+import BakeryPage from './pages/Bakery';
+import BakeryItemPage from './pages/BakeryItem';
 import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
@@ -34,6 +38,10 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/menu" element={<MenuPage />} />
               <Route path="/menu/:id" element={<MenuItemPage />} />
+              <Route path="/stays" element={<StaysPage />} />
+              <Route path="/stays/:slug" element={<StayListingPage />} />
+              <Route path="/bakery" element={<BakeryPage />} />
+              <Route path="/bakery/:slug" element={<BakeryItemPage />} />
               <Route path="/about" element={<About />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />

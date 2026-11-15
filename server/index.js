@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 import { authRouter } from './routes/auth.js';
 import { deliveryRouter } from './routes/delivery.js';
+import { staysRouter } from './routes/stays.js';
+import { bakeryRouter } from './routes/bakery.js';
 
 const PORT = Number(process.env.API_PORT) || 5181;
 const ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5180';
@@ -35,9 +37,21 @@ const authLimit = rateLimit({
   message: { ok: false, error: 'Too many attempts. Try again in a few minutes.' },
 });
 
+const bookLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 25,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { ok: false, error: 'Too many booking attempts. Try again in a few minutes.' },
+});
+
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.use('/api/auth', authLimit, authRouter);
 app.use('/api', deliveryRouter);
+app.use('/api/stays/book', bookLimit);
+app.use('/api/bakery/book', bookLimit);
+app.use('/api/stays', staysRouter);
+app.use('/api/bakery', bakeryRouter);
 
 app.use((_req, res) => res.status(404).json({ ok: false, error: 'Not found.' }));
 

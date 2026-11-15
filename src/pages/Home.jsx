@@ -46,8 +46,11 @@ export default function Home() {
             >
               The menu
             </Link>
-            <Link to="/contact" className="text-[13px] text-zinc-400 hover:text-zinc-100 underline underline-offset-8 decoration-zinc-600">
-              Book a table
+            <Link to="/stays" className="text-[13px] text-zinc-400 hover:text-zinc-100 underline underline-offset-8 decoration-zinc-600">
+              Book a room
+            </Link>
+            <Link to="/bakery" className="text-[13px] text-zinc-400 hover:text-zinc-100 underline underline-offset-8 decoration-zinc-600">
+              The bakery
             </Link>
           </div>
         </div>
@@ -135,6 +138,27 @@ export default function Home() {
       </section>
 
       <div className="home-hairline mx-auto max-w-xs" />
+
+      <section className="px-6 py-24 md:py-28">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16">
+          <Link to="/stays" className="group block">
+            <p className="text-[11px] tracking-[0.2em] text-zinc-500 mb-4">Stay</p>
+            <h2 className="font-serif text-3xl text-zinc-50 group-hover:text-[#c4a35a] transition-colors">Rooms above the house</h2>
+            <p className="mt-4 text-[15px] leading-8 text-zinc-500 font-light">
+              Four rooms, booked by the night. Come down for katogo. Sleep above the last round.
+            </p>
+            <span className="inline-block mt-6 text-[13px] text-zinc-400 underline underline-offset-8">See dates</span>
+          </Link>
+          <Link to="/bakery" className="group block">
+            <p className="text-[11px] tracking-[0.2em] text-zinc-500 mb-4">Bakery</p>
+            <h2 className="font-serif text-3xl text-zinc-50 group-hover:text-[#c4a35a] transition-colors">Cakes and morning trays</h2>
+            <p className="mt-4 text-[15px] leading-8 text-zinc-500 font-light">
+              Order the cake before the day. The counter keeps the slot; you collect, or we send it out.
+            </p>
+            <span className="inline-block mt-6 text-[13px] text-zinc-400 underline underline-offset-8">Book an order</span>
+          </Link>
+        </div>
+      </section>
 
       <section className="px-6 py-20 md:py-24">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 md:gap-8">

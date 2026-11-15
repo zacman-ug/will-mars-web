@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import { STAY_LISTINGS } from '../src/constants/stays.js';
+import { BAKERY_ITEMS } from '../src/constants/bakery.js';
 
 const prisma = new PrismaClient();
 
@@ -19,6 +21,49 @@ async function main() {
       where: { slug: zone.slug },
       update: { name: zone.name, fee: zone.fee, sortOrder: zone.sortOrder, active: true },
       create: zone,
+    });
+  }
+
+  for (const listing of STAY_LISTINGS) {
+    await prisma.stayListing.upsert({
+      where: { slug: listing.slug },
+      update: {
+        title: listing.title,
+        summary: listing.summary,
+        description: listing.description,
+        nightlyRate: listing.nightlyRate,
+        cleaningFee: listing.cleaningFee,
+        maxGuests: listing.maxGuests,
+        bedrooms: listing.bedrooms,
+        beds: listing.beds,
+        baths: listing.baths,
+        amenities: listing.amenities,
+        images: listing.images,
+        active: true,
+        sortOrder: listing.sortOrder,
+      },
+      create: listing,
+    });
+  }
+
+  for (const item of BAKERY_ITEMS) {
+    await prisma.bakeryItem.upsert({
+      where: { slug: item.slug },
+      update: {
+        name: item.name,
+        summary: item.summary,
+        description: item.description,
+        category: item.category,
+        basePrice: item.basePrice,
+        leadHours: item.leadHours,
+        image: item.image,
+        sizes: item.sizes,
+        flavours: item.flavours,
+        extras: item.extras,
+        active: true,
+        sortOrder: item.sortOrder,
+      },
+      create: item,
     });
   }
 }

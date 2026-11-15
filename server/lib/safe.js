@@ -5,6 +5,7 @@ export const MAX = {
   password: 72,
   note: 500,
   destination: 160,
+  cakeMessage: 80,
 };
 
 export const clampString = (value, max) => {

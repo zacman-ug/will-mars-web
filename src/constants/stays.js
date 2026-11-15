@@ -1,0 +1,68 @@
+export const STAY_LISTINGS = [
+  {
+    slug: 'makamba-suite',
+    title: 'Makamba Suite',
+    summary: 'Quiet room above the bar, with morning light on the road.',
+    description:
+      'A proper room for two, not a hotel corridor. You sleep above Will-mar’s, come down for katogo, and walk back up after the last round. Ensuite, desk, and linen that is actually changed.',
+    nightlyRate: 180000,
+    cleaningFee: 25000,
+    maxGuests: 2,
+    bedrooms: 1,
+    beds: 1,
+    baths: 1,
+    amenities: ['Wifi', 'Ensuite', 'Air conditioning', 'Workspace', 'Breakfast on request', 'Street parking'],
+    images: ['/images/gallery/gal-02.webp', '/images/site/interior.webp', '/images/gallery/gal-04.webp'],
+    sortOrder: 1,
+  },
+  {
+    slug: 'garden-room',
+    title: 'Garden Room',
+    summary: 'Ground-floor stay with a small courtyard for evening air.',
+    description:
+      'One bedroom opening onto the courtyard. Suited to a couple who want the kitchen close and the street a little further away. Shower, kettle, and a table for two.',
+    nightlyRate: 140000,
+    cleaningFee: 20000,
+    maxGuests: 2,
+    bedrooms: 1,
+    beds: 1,
+    baths: 1,
+    amenities: ['Wifi', 'Private courtyard', 'Ensuite', 'Kettle', 'Breakfast on request'],
+    images: ['/images/gallery/gal-03.webp', '/images/gallery/gal-08.webp', '/images/site/interior.webp'],
+    sortOrder: 2,
+  },
+  {
+    slug: 'family-loft',
+    title: 'Family Loft',
+    summary: 'Two rooms under one roof — for a small household visiting Kampala.',
+    description:
+      'A loft with a double and two singles. The restaurant is downstairs; the loft stays shut from the Saturday noise after eleven. Good for families who eat with us and sleep here.',
+    nightlyRate: 250000,
+    cleaningFee: 35000,
+    maxGuests: 4,
+    bedrooms: 2,
+    beds: 3,
+    baths: 1,
+    amenities: ['Wifi', 'Family layout', 'Air conditioning', 'Cots on request', 'Kitchenette', 'Street parking'],
+    images: ['/images/gallery/gal-06.webp', '/images/gallery/gal-04.webp', '/images/gallery/gal-07.webp'],
+    sortOrder: 3,
+  },
+  {
+    slug: 'courtyard-studio',
+    title: 'Courtyard Studio',
+    summary: 'Open studio for three, with the courtyard as the sitting room.',
+    description:
+      'Studio living: bed, sofa, and a writing table looking onto the court. Three can share if two take the sofa-bed. Close to the bakery counter in the morning.',
+    nightlyRate: 200000,
+    cleaningFee: 28000,
+    maxGuests: 3,
+    bedrooms: 1,
+    beds: 2,
+    baths: 1,
+    amenities: ['Wifi', 'Studio layout', 'Sofa-bed', 'Ensuite', 'Breakfast on request'],
+    images: ['/images/gallery/gal-09.webp', '/images/gallery/gal-05.webp', '/images/site/hero.webp'],
+    sortOrder: 4,
+  },
+];
+
+export const getStayBySlug = (slug) => STAY_LISTINGS.find((listing) => listing.slug === slug);

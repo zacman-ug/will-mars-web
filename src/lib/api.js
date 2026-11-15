@@ -38,4 +38,19 @@ export const api = {
   zones: () => request('/api/zones'),
   quote: (zoneId) => request('/api/quote', { method: 'POST', body: { zoneId } }),
   saveOrder: (body) => request('/api/orders', { method: 'POST', body }),
+  stays: (params = {}) => {
+    const query = new URLSearchParams(
+      Object.fromEntries(Object.entries(params).filter(([, value]) => value != null && value !== ''))
+    ).toString();
+    return request(`/api/stays${query ? `?${query}` : ''}`);
+  },
+  stay: (slug) => request(`/api/stays/${encodeURIComponent(slug)}`),
+  stayAvailability: (slug, from, to) => {
+    const query = new URLSearchParams({ from, to }).toString();
+    return request(`/api/stays/${encodeURIComponent(slug)}/availability?${query}`);
+  },
+  bookStay: (body) => request('/api/stays/book', { method: 'POST', body }),
+  bakery: () => request('/api/bakery'),
+  bakeryItem: (slug) => request(`/api/bakery/${encodeURIComponent(slug)}`),
+  bookBakery: (body) => request('/api/bakery/book', { method: 'POST', body }),
 };

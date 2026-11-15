@@ -17,9 +17,13 @@ export const Footer = () => {
           <p className="flex gap-2 text-sm text-zinc-300"><Mail size={16} className="text-brand-amber shrink-0" />{SITE.email}</p>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-widest text-zinc-500 mb-4">Menu</p>
+          <p className="text-xs uppercase tracking-widest text-zinc-500 mb-4">Book</p>
           <div className="grid grid-cols-1 gap-2 text-sm">
-            {CATEGORIES.slice(0, 6).map((cat) => (
+            <Link to="/stays" className="text-zinc-400 hover:text-brand-amber">Stays</Link>
+            <Link to="/bakery" className="text-zinc-400 hover:text-brand-amber">Bakery</Link>
+            <Link to="/menu" className="text-zinc-400 hover:text-brand-amber">Kitchen menu</Link>
+            <Link to="/contact" className="text-zinc-400 hover:text-brand-amber">A table</Link>
+            {CATEGORIES.slice(0, 2).map((cat) => (
               <Link key={cat.id} to={`/menu?cat=${cat.id}`} className="text-zinc-400 hover:text-brand-amber">
                 {cat.name}
               </Link>

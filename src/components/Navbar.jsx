@@ -8,6 +8,8 @@ import { useAuth } from '../context/AuthContext';
 const links = [
   { to: '/', label: 'Home' },
   { to: '/menu', label: 'Menu' },
+  { to: '/stays', label: 'Stays' },
+  { to: '/bakery', label: 'Bakery' },
   { to: '/about', label: 'About' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/contact', label: 'Contact' },
@@ -25,7 +27,7 @@ export const Navbar = () => {
           {SITE.name}
         </Link>
 
-        <div className="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-bold">
+        <div className="hidden lg:flex items-center gap-7 text-xs uppercase tracking-widest font-bold">
           {links.map((link) => (
             <NavLink
               key={link.to}
@@ -69,14 +71,14 @@ export const Navbar = () => {
           >
             Order now
           </Link>
-          <button className="md:hidden text-brand-amber" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+          <button className="lg:hidden text-brand-amber" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
             {isOpen ? <X /> : <Menu />}
           </button>
         </div>
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-zinc-900 border-b border-white/10 p-6 flex flex-col gap-4 uppercase text-xs font-bold tracking-widest">
+        <div className="lg:hidden bg-zinc-900 border-b border-white/10 p-6 flex flex-col gap-4 uppercase text-xs font-bold tracking-widest">
           {links.map((link) => (
             <NavLink key={link.to} to={link.to} onClick={() => setIsOpen(false)}>
               {link.label}

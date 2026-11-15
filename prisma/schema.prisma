@@ -13,18 +13,26 @@ enum AuthProvider {
   facebook
 }
 
+enum BookingStatus {
+  pending
+  confirmed
+  cancelled
+}
+
 model Customer {
-  id           String       @id @default(cuid())
-  firstName    String
-  lastName     String
-  birthday     DateTime?
-  phone        String       @unique
-  email        String       @unique
-  passwordHash String?
-  provider     AuthProvider @default(local)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  orders       Order[]
+  id            String         @id @default(cuid())
+  firstName     String
+  lastName      String
+  birthday      DateTime?
+  phone         String         @unique
+  email         String         @unique
+  passwordHash  String?
+  provider      AuthProvider   @default(local)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  orders        Order[]
+  stayBookings  StayBooking[]
+  bakeryOrders  BakeryOrder[]
 
   @@index([email])
   @@index([phone])
@@ -56,4 +64,91 @@ model Order {
   total          Int
   itemsJson      Json
   createdAt      DateTime      @default(now())
+}
+
+model StayListing {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  title        String
+  summary      String
+  description  String
+  nightlyRate  Int
+  cleaningFee  Int           @default(0)
+  maxGuests    Int
+  bedrooms     Int
+  beds         Int
+  baths        Int
+  amenities    Json
+  images       Json
+  active       Boolean       @default(true)
+  sortOrder    Int           @default(0)
+  bookings     StayBooking[]
+}
+
+model StayBooking {
+  id          String        @id @default(cuid())
+  listingId   String
+  listing     StayListing   @relation(fields: [listingId], references: [id])
+  customerId  String?
+  customer    Customer?     @relation(fields: [customerId], references: [id])
+  guestName   String
+  guestPhone  String
+  guestEmail  String?
+  checkIn     DateTime
+  checkOut    DateTime
+  guests      Int
+  nights      Int
+  nightlyRate Int
+  cleaningFee Int
+  total       Int
+  note        String?
+  status      BookingStatus @default(pending)
+  createdAt   DateTime      @default(now())
+
+  @@index([listingId, checkIn, checkOut])
+  @@index([status])
+}
+
+model BakeryItem {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  name        String
+  summary     String
+  description String
+  category    String
+  basePrice   Int
+  leadHours   Int           @default(24)
+  image       String
+  sizes       Json
+  flavours    Json
+  extras      Json
+  active      Boolean       @default(true)
+  sortOrder   Int           @default(0)
+  orders      BakeryOrder[]
+}
+
+model BakeryOrder {
+  id             String      @id @default(cuid())
+  itemId         String
+  item           BakeryItem  @relation(fields: [itemId], references: [id])
+  customerId     String?
+  customer       Customer?   @relation(fields: [customerId], references: [id])
+  guestName      String
+  guestPhone     String
+  guestEmail     String?
+  pickupAt       DateTime
+  fulfillment    String
+  destination    String?
+  sizeId         String?
+  flavourId      String?
+  extraIds       Json
+  qty            Int
+  messageOnCake  String?
+  note           String?
+  unitPrice      Int
+  total          Int
+  status         BookingStatus @default(pending)
+  createdAt      DateTime    @default(now())
+
+  @@index([itemId, pickupAt])
 }

@@ -87,6 +87,57 @@ export const orderSchema = z.object({
     .max(40),
 });
 
+const isoDate = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, 'Choose a valid date.');
+
+const guestPhone = z
+  .string()
+  .transform(normalizeUgPhone)
+  .pipe(z.string().regex(/^[7]\d{8}$/, 'Enter a valid Uganda mobile number.'));
+
+const optionalEmail = z
+  .string()
+  .trim()
+  .max(MAX.email)
+  .optional()
+  .transform((value) => (value ? normalizeEmail(value) : undefined))
+  .refine((value) => !value || z.string().email().safeParse(value).success, 'Enter a valid email address.');
+
+export const staySearchSchema = z.object({
+  checkIn: isoDate.optional(),
+  checkOut: isoDate.optional(),
+  guests: z.coerce.number().int().min(1).max(12).optional(),
+});
+
+export const stayBookSchema = z.object({
+  slug: z.string().trim().min(1).max(80),
+  checkIn: isoDate,
+  checkOut: isoDate,
+  guests: z.coerce.number().int().min(1).max(12),
+  guestName: name,
+  guestPhone,
+  guestEmail: optionalEmail,
+  note: z.string().max(MAX.note).optional(),
+});
+
+export const bakeryBookSchema = z.object({
+  slug: z.string().trim().min(1).max(80),
+  pickupDate: isoDate,
+  pickupTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Choose a pickup time.'),
+  fulfillment: z.enum(['pickup', 'delivery']),
+  destination: z.string().max(MAX.destination).optional(),
+  sizeId: z.string().trim().max(40).optional(),
+  flavourId: z.string().trim().max(40).optional(),
+  extraIds: z.array(z.string().trim().max(40)).max(12).optional(),
+  qty: z.coerce.number().int().min(1).max(20),
+  guestName: name,
+  guestPhone,
+  guestEmail: optionalEmail,
+  messageOnCake: z.string().max(MAX.cakeMessage).optional(),
+  note: z.string().max(MAX.note).optional(),
+});
+
 export const firstZodError = (error) => {
   const issue = error?.issues?.[0] || error?.errors?.[0];
   return issue?.message || 'Please check your details.';
